@@ -1,0 +1,24 @@
+{
+  "name": "chao",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "mobile": "npm run start --workspace mobile",
+    "admin": "npm run dev --workspace admin",
+    "grant-admin": "npm run grant-admin -w admin --",
+    "seed": "npm run seed -w admin --",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  },
+  "overrides": {
+    "expo-asset": "~57.0.20"
+  }
+}

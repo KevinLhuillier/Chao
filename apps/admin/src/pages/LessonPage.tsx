@@ -52,6 +52,7 @@ const toDraft = (d: LessonDetail): Draft => ({
 /** A new, empty activity of a type. */
 function blank(type: ActivityType, firstWord?: string): ActivityDraft {
   if (type === 'match') return { type, data: { word_ids: [] } };
+  if (type === 'note') return { type, data: { title: {}, blocks: [] } };
   if (type === 'build_vi' || type === 'build_meaning') {
     return { type, data: { sentence: { vi: '', meaning: {} } } };
   }

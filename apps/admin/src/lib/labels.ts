@@ -7,6 +7,7 @@ import {
   Clock,
   CloudSun,
   Ear,
+  FileText,
   Hand,
   Hash,
   Headphones,
@@ -29,9 +30,14 @@ export const ACTIVITY_LABELS: Record<
   { label: string; hint: string; icon: LucideIcon }
 > = {
   learn: {
-    label: 'Fiche de cours',
+    label: 'Fiche mot',
     hint: 'Présente un mot : audio, sens, astuce, exemple.',
     icon: BookOpen,
+  },
+  note: {
+    label: 'Fiche de cours libre',
+    hint: 'Titres, textes, sons à écouter, exemples : pour l’alphabet, les tons, la grammaire…',
+    icon: FileText,
   },
   choice_meaning: {
     label: 'QCM vietnamien → anglais',

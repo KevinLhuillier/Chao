@@ -5,13 +5,14 @@ import Animated from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { t } from '@/i18n';
-import { isGraded, type Exercise } from '@/lib/session';
+import { isCard, isGraded, type Exercise } from '@/lib/session';
 import { Button, Icon, ProgressBar, Text, colors, enter, haptics, spacing } from '@/theme';
 
 import { Build } from './Build';
 import { Choice } from './Choice';
 import { Learn } from './Learn';
 import { Match } from './Match';
+import { Note } from './Note';
 import { TypeAnswer } from './TypeAnswer';
 import type { ExerciseProps, Feedback } from './types';
 
@@ -102,6 +103,8 @@ export function LessonPlayer({ exercises, tint, onFinish, onQuit }: Props) {
           {ex ? (
             ex.kind === 'learn' ? (
               <Learn ex={ex} {...props} />
+            ) : ex.kind === 'note' ? (
+              <Note ex={ex} {...props} />
             ) : ex.kind === 'choice' ? (
               <Choice ex={ex} {...props} />
             ) : ex.kind === 'type' ? (
@@ -118,7 +121,7 @@ export function LessonPlayer({ exercises, tint, onFinish, onQuit }: Props) {
           <FeedbackPanel feedback={feedback} onContinue={() => next(feedback)} />
         ) : (
           <View style={styles.footer}>
-            {ex?.kind === 'learn' ? (
+            {ex && isCard(ex) ? (
               <Button
                 label={t.common.continue}
                 colorOverride={{ face: tint.solid, edge: tint.shade }}

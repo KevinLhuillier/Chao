@@ -120,10 +120,33 @@ export type Sentence = {
   audio_url?: string | null;
 };
 
+/** A Vietnamese sound (letter, syllable, word) the learner can tap to hear. */
+export type NoteSound = {
+  vi: string;
+  /** Short explanation under it ("as in «ba»"). */
+  caption?: LocalizedText;
+  audio_url: string | null;
+};
+
+/**
+ * A block of a free lesson card. In `text` and `tip`, **bold** is bold and
+ * [xin chào] is Vietnamese: tappable when `sounds` has a recording for it.
+ */
+export type NoteBlock =
+  | { type: 'heading'; text: LocalizedText }
+  | { type: 'text'; text: LocalizedText; sounds?: Record<string, string> }
+  | { type: 'tip'; text: LocalizedText; sounds?: Record<string, string> }
+  | { type: 'sounds'; items: NoteSound[] }
+  | { type: 'example'; vi: string; meaning: LocalizedText; audio_url: string | null };
+
+export type NoteBlockType = NoteBlock['type'];
+
 /** Every activity type and its payload. No speaking: the app never uses the microphone. */
 export type ActivityDataMap = {
   /** Lesson card: introduces a word (audio, meaning, tips). */
   learn: { word_id: string };
+  /** Free lesson card (alphabet, tones, grammar…): blocks of text and sounds, no word needed. */
+  note: { title: LocalizedText; blocks: NoteBlock[] };
   /** "What does «xin chào» mean?" — options in the learner's language. */
   choice_meaning: { word_id: string };
   /** "How do you say «hello»?" — options in Vietnamese. */
@@ -148,6 +171,7 @@ export type ActivityType = keyof ActivityDataMap;
 
 export const ACTIVITY_TYPES = [
   'learn',
+  'note',
   'choice_meaning',
   'choice_vi',
   'listen_choice',
@@ -171,8 +195,34 @@ export const NEEDS_AUDIO: readonly ActivityType[] = ['listen_choice', 'listen_ty
 /** Word ids an activity refers to. */
 export function activityWordIds(a: ActivityPayload): string[] {
   if (a.type === 'match') return a.data.word_ids;
-  if (a.type === 'build_vi' || a.type === 'build_meaning') return [];
+  if (a.type === 'build_vi' || a.type === 'build_meaning' || a.type === 'note') return [];
   return [a.data.word_id];
+}
+
+export type RichPart = { kind: 'text' | 'bold' | 'vi'; value: string };
+
+/** "Say **slowly**: [xin chào]" → text, bold and Vietnamese parts. */
+export function parseRich(s: string): RichPart[] {
+  const parts: RichPart[] = [];
+  const re = /\*\*(.+?)\*\*|\[([^\]]+)\]/g;
+  let last = 0;
+  for (const m of s.matchAll(re)) {
+    if (m.index > last) parts.push({ kind: 'text', value: s.slice(last, m.index) });
+    parts.push(m[1] !== undefined ? { kind: 'bold', value: m[1] } : { kind: 'vi', value: m[2]! });
+    last = m.index + m[0].length;
+  }
+  if (last < s.length) parts.push({ kind: 'text', value: s.slice(last) });
+  return parts;
+}
+
+/** Vietnamese bits ([…]) of a text, in every language, without duplicates. */
+export function richViTokens(text: LocalizedText): string[] {
+  const all = Object.values(text).flatMap((s) =>
+    parseRich(s ?? '')
+      .filter((p) => p.kind === 'vi')
+      .map((p) => p.value),
+  );
+  return [...new Set(all)];
 }
 
 // ---------------------------------------------------------------------------

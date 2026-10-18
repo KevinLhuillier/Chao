@@ -10,6 +10,7 @@ import {
   shuffle,
   type ActivityPayload,
   type Lang,
+  type NoteBlock,
   type Sentence,
   type WordRow,
 } from '@chao/shared';
@@ -22,6 +23,7 @@ export type TypeMode = 'meaning' | 'vi' | 'listen';
 export type Exercise = Base &
   (
     | { kind: 'learn'; word: WordRow }
+    | { kind: 'note'; title: string; blocks: NoteBlock[] }
     | { kind: 'choice'; mode: ChoiceMode; word: WordRow; options: string[]; answer: string }
     | { kind: 'type'; mode: TypeMode; word: WordRow; accepted: string[] }
     | { kind: 'match'; pairs: { id: string; vi: string; meaning: string; audio: string | null }[] }
@@ -39,7 +41,10 @@ export type Exercise = Base &
   );
 
 /** Exercises that count in the lesson accuracy. */
-export const isGraded = (ex: Exercise) => ex.kind !== 'learn';
+export const isGraded = (ex: Exercise) => ex.kind !== 'learn' && ex.kind !== 'note';
+
+/** Exercises the learner only reads: a "Continue" button instead of "Check". */
+export const isCard = (ex: Exercise) => ex.kind === 'learn' || ex.kind === 'note';
 
 const meaningOf = (w: WordRow, lang: Lang) => localize(w.meaning, lang);
 
@@ -136,6 +141,13 @@ export function buildExercises(
 
   activities.forEach((a, i) => {
     const key = `${i}-${a.type}`;
+    if (a.type === 'note') {
+      if (a.data.blocks.length || localize(a.data.title, lang)) {
+        const title = localize(a.data.title, lang);
+        out.push({ key, retry: false, kind: 'note', title, blocks: a.data.blocks });
+      }
+      return;
+    }
     if (a.type === 'build_vi' || a.type === 'build_meaning') {
       const ex = buildExercise(a.type, a.data.sentence, pool, lang, key);
       if (ex) out.push(ex);

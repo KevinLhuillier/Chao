@@ -670,6 +670,23 @@ textarea.input {
   background: var(--primary-soft);
 }
 
+/* --- Free lesson cards ------------------------------------------------------- */
+
+.note-block {
+  padding: var(--space-md);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.note-sound {
+  display: grid;
+  grid-template-columns: 90px 1fr 1.4fr auto;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.note-add {
+  gap: var(--space-xs);
+}
+
 /* --- Pickers ------------------------------------------------------------------ */
 
 .swatches,

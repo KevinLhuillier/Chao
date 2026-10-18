@@ -5,6 +5,7 @@ import type { ActivityDraft } from '../../shared/api';
 import { ACTIVITY_LABELS } from '../lib/labels';
 import { AudioField } from './AudioField';
 import { LocalizedInput, fromList, toList } from './LocalizedInput';
+import { NoteEditor, noteIssues } from './NoteEditor';
 import { Badge, Button, Field } from './ui';
 
 type Props = {
@@ -22,6 +23,7 @@ type Props = {
 /** Problems that make the app skip or downgrade an activity. */
 export function activityIssues(a: ActivityDraft, words: Map<string, WordRow>): string[] {
   const issues: string[] = [];
+  if (a.type === 'note') return noteIssues(a.data);
   if (a.type === 'match') {
     const found = a.data.word_ids.filter((id) => words.has(id));
     if (found.length < 2) issues.push('Choisir au moins 2 mots.');
@@ -108,7 +110,9 @@ export function ActivityCard({
       </header>
 
       <div className="activity-body">
-        {activity.type === 'match' ? (
+        {activity.type === 'note' ? (
+          <NoteEditor note={activity.data} onChange={(data) => onChange({ ...activity, data })} />
+        ) : activity.type === 'match' ? (
           <MatchEditor
             ids={activity.data.word_ids}
             lessonWords={lessonWords}

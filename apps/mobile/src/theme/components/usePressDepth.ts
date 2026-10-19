@@ -3,8 +3,8 @@ import { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reani
 import { springs } from '../motion';
 
 /**
- * "3D press" effect shared by Button and Card: the face sits `depth` px above a
- * darker edge and slides down onto it while pressed.
+ * "3D press" effect of the river map's lily pads: the face sits `depth` px above
+ * a darker edge and slides down onto it while pressed.
  */
 export function usePressDepth(depth: number) {
   const pressed = useSharedValue(0);

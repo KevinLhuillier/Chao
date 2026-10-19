@@ -21,6 +21,7 @@ import {
   colors,
   enter,
   haptics,
+  borderWidth,
   radii,
   spacing,
   unitTint,
@@ -92,7 +93,7 @@ export default function Words() {
         ) : (
           <>
             {total >= MIN_PRACTICE ? (
-              <Card tint={{ face: colors.primarySoft, edge: colors.primary }}>
+              <Card tint={{ background: colors.primarySoft, border: colors.primarySoft }}>
                 <View style={styles.row}>
                   <Icon icon={Dumbbell} size={24} color={colors.primaryShade} />
                   <Text variant="bodyBold" style={styles.flex}>
@@ -263,7 +264,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
     borderRadius: radii.pill,
-    borderWidth: 2,
+    borderWidth,
     borderColor: colors.border,
   },
   dot: { width: 10, height: 10, borderRadius: 5 },
@@ -275,15 +276,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
   },
-  divider: { borderTopWidth: 2, borderTopColor: colors.border },
-  pressed: { backgroundColor: colors.background },
+  divider: { borderTopWidth: borderWidth, borderTopColor: colors.border },
+  pressed: { backgroundColor: colors.surfaceMuted },
   locked: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.md,
     padding: spacing.lg,
-    borderRadius: radii.lg,
-    borderWidth: 2,
+    borderRadius: radii.md,
+    borderWidth,
     borderStyle: 'dashed',
     borderColor: colors.borderShade,
   },

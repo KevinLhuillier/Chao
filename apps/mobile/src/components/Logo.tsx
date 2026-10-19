@@ -26,7 +26,12 @@ export function Logo({ size = 30 }: { size?: number }) {
         />
       </Svg>
       <Text
-        style={{ fontFamily: fonts.black, fontSize: size, lineHeight: size * 1.4 }}
+        style={{
+          fontFamily: fonts.bold,
+          fontSize: size,
+          lineHeight: size * 1.4,
+          letterSpacing: -0.5,
+        }}
         color={colors.accent}>
         Chào
       </Text>

@@ -98,7 +98,7 @@ export default function Celebration() {
         </Animated.View>
 
         <Animated.View entering={enter.up(240)}>
-          <Card tint={{ face: colors.xpSoft, edge: colors.xp }} padding={spacing.xl}>
+          <Card tint={{ background: colors.xpSoft, border: colors.xpSoft }} padding={spacing.xl}>
             <View style={styles.xpRow}>
               <Icon icon={Zap} size={36} color={colors.xpShade} />
               <Text variant="display" color={colors.xpShade}>
@@ -132,11 +132,7 @@ export default function Celebration() {
       </View>
 
       <Animated.View entering={enter.up(480)} style={styles.footer}>
-        <Button
-          label={t.common.continue}
-          colorOverride={{ face: tint.solid, edge: tint.shade }}
-          onPress={() => router.back()}
-        />
+        <Button label={t.common.continue} onPress={() => router.back()} />
       </Animated.View>
     </SafeAreaView>
   );
@@ -189,8 +185,6 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: radii.pill,
     backgroundColor: river.water,
-    borderBottomWidth: 6,
-    borderBottomColor: river.waterDeep,
     alignItems: 'center',
   },
   boat: { marginTop: -46 },

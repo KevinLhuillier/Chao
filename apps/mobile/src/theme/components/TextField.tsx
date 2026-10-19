@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, TextInput, View, type TextInputProps, type ViewStyle } from 'react-native';
 
 import { colors } from '../colors';
-import { radii, spacing, touchTarget } from '../spacing';
+import { borderWidth, radii, spacing, touchTarget } from '../spacing';
 import { typography } from '../typography';
 import { Icon, type LucideIcon } from './Icon';
 import { Text } from './Text';
@@ -53,11 +53,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.sm,
     paddingHorizontal: spacing.lg,
-    borderRadius: radii.md,
-    borderWidth: 2,
-    borderColor: colors.border,
+    borderRadius: radii.sm,
+    borderWidth,
+    borderColor: colors.borderShade,
     backgroundColor: colors.surface,
   },
   focused: { borderColor: colors.primary },
-  input: { flex: 1, ...typography.bodyBold, color: colors.text, paddingVertical: spacing.md },
+  input: { flex: 1, ...typography.body, color: colors.text, paddingVertical: spacing.md },
 });

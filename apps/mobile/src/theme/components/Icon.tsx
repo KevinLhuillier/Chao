@@ -12,9 +12,9 @@ export type IconProps = {
   color?: ColorValue;
 };
 
-/** Lucide icon with the app's stroke weight (chunky, rounded). */
+/** Lucide icon with the app's stroke weight (light, rounded). */
 export function Icon({ icon: Glyph, size = 20, color = colors.text }: IconProps) {
-  return <Glyph size={size} color={color as string} strokeWidth={size >= 32 ? 2.25 : 2.5} />;
+  return <Glyph size={size} color={color as string} strokeWidth={size >= 32 ? 1.75 : 2} />;
 }
 
 export type IconBubbleProps = IconProps & {

@@ -63,20 +63,20 @@ export function Sheet({
 
 const styles = StyleSheet.create({
   root: { flex: 1, justifyContent: 'flex-end' },
-  backdrop: { backgroundColor: 'rgba(45,41,38,0.35)' },
+  backdrop: { backgroundColor: 'rgba(31,27,24,0.4)' },
   sheet: {
     maxHeight: '88%',
     backgroundColor: colors.surface,
-    borderTopLeftRadius: radii.xl,
-    borderTopRightRadius: radii.xl,
+    borderTopLeftRadius: radii.lg,
+    borderTopRightRadius: radii.lg,
     padding: spacing.xl,
     gap: spacing.lg,
   },
   handle: {
     alignSelf: 'center',
-    width: 44,
-    height: 5,
+    width: 36,
+    height: 4,
     borderRadius: radii.pill,
-    backgroundColor: colors.border,
+    backgroundColor: colors.borderShade,
   },
 });

@@ -73,12 +73,7 @@ export function WordSheet({
           </View>
         ) : null}
       </ScrollView>
-      <Button
-        label={t.common.close}
-        haptic="tap"
-        colorOverride={{ face: tint.solid, edge: tint.shade }}
-        onPress={onClose}
-      />
+      <Button label={t.common.close} haptic="tap" onPress={onClose} />
     </Sheet>
   );
 }

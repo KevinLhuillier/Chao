@@ -13,7 +13,7 @@ import { DAILY_GOAL_OPTIONS, displayedStreak } from '@/lib/gamification';
 import { useStats } from '@/lib/stats';
 import { supabase } from '@/lib/supabase';
 import type { Profile as ProfileRow } from '@/lib/types';
-import { Badge, Button, Card, Icon, Text, colors, radii, spacing } from '@/theme';
+import { Badge, Button, Card, Icon, Text, borderWidth, colors, radii, spacing } from '@/theme';
 
 export default function Profile() {
   const { session } = useAuth();
@@ -121,8 +121,8 @@ export default function Profile() {
 
         <Button
           label={t.profile.signOut}
-          variant="danger"
-          icon={<Icon icon={LogOut} size={20} color={colors.textOnColor} />}
+          variant="secondary"
+          icon={<Icon icon={LogOut} size={20} color={colors.danger} />}
           onPress={() => setConfirmOut(true)}
         />
       </ScrollView>
@@ -158,9 +158,7 @@ function Stat({
   return (
     <Card style={styles.stat} padding={spacing.md}>
       <Icon icon={icon} size={22} color={color} />
-      <Text variant="title" color={color}>
-        {value}
-      </Text>
+      <Text variant="title">{value}</Text>
       {/* Always one line: shrinks slightly on narrow screens instead of wrapping. */}
       <Text
         variant="caption"
@@ -183,8 +181,6 @@ const styles = StyleSheet.create({
     height: 64,
     borderRadius: 32,
     backgroundColor: colors.accent,
-    borderBottomWidth: 4,
-    borderBottomColor: colors.accentShade,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -200,8 +196,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.sm,
     borderRadius: radii.pill,
-    borderWidth: 2,
-    borderColor: colors.border,
+    borderWidth,
+    borderColor: colors.borderShade,
   },
   langActive: { borderColor: colors.primary, backgroundColor: colors.primarySoft },
   langSoon: { opacity: 0.5 },

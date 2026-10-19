@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { t } from '@/i18n';
 import { displayedStreak } from '@/lib/gamification';
 import { useStats } from '@/lib/stats';
-import { Badge, Icon, ProgressBar, Text, colors, radii, spacing } from '@/theme';
+import { Badge, Icon, ProgressBar, Text, borderWidth, colors, radii, spacing } from '@/theme';
 
 import { Logo } from './Logo';
 
@@ -31,7 +31,7 @@ export function StatsBar() {
         <ProgressBar
           progress={todayXp / goal}
           color={reached ? colors.success : colors.xp}
-          height={12}
+          height={6}
           style={styles.bar}
         />
         <Text variant="caption" color={colors.textSecondary}>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     paddingTop: spacing.sm,
     paddingBottom: spacing.md,
     backgroundColor: colors.background,
-    borderBottomWidth: 2,
+    borderBottomWidth: borderWidth,
     borderBottomColor: colors.border,
   },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs + 2,
     borderRadius: radii.pill,
     backgroundColor: colors.surface,
-    borderWidth: 2,
+    borderWidth,
     borderColor: colors.border,
   },
   bar: { flex: 1, width: undefined },

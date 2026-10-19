@@ -65,7 +65,6 @@ export function LessonSheet({ target, visible, onStart, onClose }: Props) {
           </View>
           <Button
             label={done ? t.journey.practiceAgain : t.journey.start}
-            colorOverride={{ face: tint.solid, edge: tint.shade }}
             icon={<Icon icon={done ? RotateCcw : Play} size={20} color={colors.textOnColor} />}
             onPress={() => onStart(lesson)}
           />

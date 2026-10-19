@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { t } from '@/i18n';
 import { isCard, isGraded, type Exercise } from '@/lib/session';
-import { Button, Icon, ProgressBar, Text, colors, enter, haptics, spacing } from '@/theme';
+import { Button, Icon, ProgressBar, Text, colors, enter, haptics, radii, spacing } from '@/theme';
 
 import { Build } from './Build';
 import { Choice } from './Choice';
@@ -91,7 +91,7 @@ export function LessonPlayer({ exercises, tint, onFinish, onQuit }: Props) {
           hitSlop={12}
           accessibilityRole="button"
           accessibilityLabel={t.lesson.quit}>
-          <Icon icon={X} size={28} color={colors.textMuted} />
+          <Icon icon={X} size={24} color={colors.textMuted} />
         </Pressable>
         <ProgressBar progress={cursor / queue.length} color={tint.solid} style={styles.flex} />
       </View>
@@ -122,18 +122,9 @@ export function LessonPlayer({ exercises, tint, onFinish, onQuit }: Props) {
         ) : (
           <View style={styles.footer}>
             {ex && isCard(ex) ? (
-              <Button
-                label={t.common.continue}
-                colorOverride={{ face: tint.solid, edge: tint.shade }}
-                onPress={() => next(null)}
-              />
+              <Button label={t.common.continue} onPress={() => next(null)} />
             ) : ex?.kind === 'match' ? null : (
-              <Button
-                label={t.lesson.check}
-                colorOverride={{ face: tint.solid, edge: tint.shade }}
-                disabled={!canCheck}
-                onPress={check}
-              />
+              <Button label={t.lesson.check} disabled={!canCheck} onPress={check} />
             )}
           </View>
         )}
@@ -199,8 +190,8 @@ const styles = StyleSheet.create({
   panel: {
     padding: spacing.xl,
     gap: spacing.md,
-    borderTopLeftRadius: 28,
-    borderTopRightRadius: 28,
+    borderTopLeftRadius: radii.lg,
+    borderTopRightRadius: radii.lg,
   },
   panelTitle: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm, flexWrap: 'wrap' },
   sub: { opacity: 0.8 },

@@ -18,11 +18,14 @@ export const radii = {
   pill: 999,
 } as const;
 
-/** Height of the "3D" bottom edge on buttons and pressable cards. */
+/** Height of the "3D" bottom edge of the river map's lily pads and banners. */
 export const depth = {
   button: 5,
   card: 4,
 } as const;
+
+/** Hairline-ish border used by every surface (cards, fields, tiles). */
+export const borderWidth = 1;
 
 /** Minimum touch target (Apple HIG / Material both recommend ~44–48). */
 export const touchTarget = 52;

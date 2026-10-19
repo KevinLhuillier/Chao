@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { Text, colors, enter, radii, spacing } from '@/theme';
+import { Text, borderWidth, colors, enter, radii, spacing } from '@/theme';
 
 import { AudioButton } from '../AudioButton';
 
@@ -26,7 +26,7 @@ export function Prompt({ instruction, text, vi, audio, listen, tint }: Props) {
           <AudioButton key={audio} uri={audio} autoPlay size="lg" slow />
         </View>
       ) : text ? (
-        <View style={[styles.bubble, { borderColor: tint.soft }]}>
+        <View style={styles.bubble}>
           {audio ? <AudioButton key={audio} uri={audio} autoPlay size="sm" /> : null}
           <Text
             variant={vi ? 'viHeading' : 'heading'}
@@ -48,8 +48,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: spacing.md,
     padding: spacing.lg,
-    borderRadius: radii.lg,
-    borderWidth: 2,
+    borderRadius: radii.md,
+    borderWidth,
+    borderColor: colors.border,
     backgroundColor: colors.surface,
   },
   flex: { flex: 1 },

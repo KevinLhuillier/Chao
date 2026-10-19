@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { LANG, t } from '@/i18n';
-import { Badge, Card, Icon, Text, colors, enter, radii, spacing } from '@/theme';
+import { Badge, Card, Icon, Text, borderWidth, colors, enter, radii, spacing } from '@/theme';
 
 import { AudioButton } from '../AudioButton';
 import type { ExerciseProps } from './types';
@@ -45,7 +45,7 @@ export function Learn({ ex, tint }: ExerciseProps<'learn'>) {
 
       {note ? (
         <Animated.View entering={enter.up(140)}>
-          <Card tint={{ face: colors.xpSoft, edge: colors.xp }} padding={spacing.md}>
+          <Card tint={{ background: colors.xpSoft, border: colors.xpSoft }} padding={spacing.md}>
             <View style={styles.row}>
               <Icon icon={Lightbulb} size={20} color={colors.xpShade} />
               <Text style={styles.flex}>{note}</Text>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
     borderRadius: radii.pill,
     backgroundColor: colors.surface,
-    borderWidth: 2,
+    borderWidth,
     borderColor: colors.border,
   },
   row: { flexDirection: 'row', alignItems: 'center', gap: spacing.md },

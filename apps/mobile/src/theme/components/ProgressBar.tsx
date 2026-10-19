@@ -15,12 +15,12 @@ export type ProgressBarProps = {
   style?: ViewStyle;
 };
 
-/** Rounded progress bar with a springy fill and a glossy highlight. */
+/** Thin rounded progress bar with a smooth spring fill. */
 export function ProgressBar({
   progress,
   color = colors.success,
   trackColor = colors.border,
-  height = 16,
+  height = 8,
   style,
 }: ProgressBarProps) {
   const [trackWidth, setTrackWidth] = useState(0);
@@ -43,9 +43,7 @@ export function ProgressBar({
       accessibilityValue={{ min: 0, max: 100, now: Math.round(clamped * 100) }}
       onLayout={(e) => setTrackWidth(e.nativeEvent.layout.width)}
       style={[styles.track, { height, backgroundColor: trackColor }, style]}>
-      <Animated.View style={[styles.fill, { backgroundColor: color }, fillStyle]}>
-        <View style={[styles.highlight, { height: height / 4, top: height / 5 }]} />
-      </Animated.View>
+      <Animated.View style={[styles.fill, { backgroundColor: color }, fillStyle]} />
     </View>
   );
 }
@@ -59,12 +57,5 @@ const styles = StyleSheet.create({
   fill: {
     height: '100%',
     borderRadius: radii.pill,
-  },
-  highlight: {
-    position: 'absolute',
-    left: 8,
-    right: 8,
-    borderRadius: radii.pill,
-    backgroundColor: 'rgba(255,255,255,0.35)',
   },
 });

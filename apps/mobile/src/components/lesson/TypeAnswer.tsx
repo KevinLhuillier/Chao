@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, TextInput } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import { LANG, t } from '@/i18n';
-import { Text, colors, enter, radii, spacing, typography } from '@/theme';
+import { Text, borderWidth, colors, enter, radii, spacing, typography } from '@/theme';
 
 import { Prompt } from './Prompt';
 import type { ExerciseProps } from './types';
@@ -58,8 +58,8 @@ export function TypeAnswer({ ex, checked, setAnswer, tint }: ExerciseProps<'type
           onBlur={() => setFocused(false)}
           style={[
             styles.input,
-            toVi ? typography.vi : typography.bodyBold,
-            { borderColor: focused ? tint.solid : colors.border },
+            toVi ? typography.vi : typography.body,
+            { borderColor: focused ? tint.solid : colors.borderShade },
           ]}
           multiline
           blurOnSubmit
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
   input: {
     minHeight: 120,
     padding: spacing.lg,
-    borderRadius: radii.lg,
-    borderWidth: 2,
+    borderRadius: radii.md,
+    borderWidth,
     backgroundColor: colors.surface,
     color: colors.text,
     textAlignVertical: 'top',

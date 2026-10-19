@@ -7,7 +7,7 @@ import Animated from 'react-native-reanimated';
 
 import { LANG } from '@/i18n';
 import { ensureAudioMode } from '@/lib/audio';
-import { Card, Icon, Text, colors, enter, haptics, radii, spacing } from '@/theme';
+import { Card, Icon, Text, borderWidth, colors, enter, haptics, radii, spacing } from '@/theme';
 
 import { AudioButton } from '../AudioButton';
 import type { ExerciseProps } from './types';
@@ -74,7 +74,7 @@ function Block({
       );
     case 'tip':
       return (
-        <Card tint={{ face: colors.xpSoft, edge: colors.xp }} padding={spacing.md}>
+        <Card tint={{ background: colors.xpSoft, border: colors.xpSoft }} padding={spacing.md}>
           <View style={styles.row}>
             <Icon icon={Lightbulb} size={20} color={colors.xpShade} />
             <RichText
@@ -180,7 +180,7 @@ function SoundTile({
       accessibilityRole="button"
       style={({ pressed }) => [
         styles.tile,
-        { borderColor: active ? tint.solid : colors.border },
+        { borderColor: active ? tint.solid : colors.borderShade },
         active && { backgroundColor: tint.soft },
         pressed && styles.pressed,
       ]}>
@@ -209,10 +209,9 @@ const styles = StyleSheet.create({
     gap: 2,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
-    borderRadius: radii.md,
-    borderWidth: 2,
-    borderBottomWidth: 4,
+    borderRadius: radii.sm,
+    borderWidth,
     backgroundColor: colors.surface,
   },
-  pressed: { transform: [{ translateY: 2 }], borderBottomWidth: 2 },
+  pressed: { backgroundColor: colors.surfaceMuted },
 });

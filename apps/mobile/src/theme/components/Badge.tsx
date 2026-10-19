@@ -10,6 +10,7 @@ import Animated, {
 import { colors } from '../colors';
 import { springs } from '../motion';
 import { radii, spacing } from '../spacing';
+import { fonts } from '../typography';
 import { Icon, type LucideIcon } from './Icon';
 import { Text } from './Text';
 
@@ -60,7 +61,7 @@ export function Badge({ label, icon, tone = 'neutral', tint: custom, solid, styl
 
   return (
     <Animated.View style={[styles.badge, { backgroundColor: tint.bg }, animatedStyle, style]}>
-      {icon ? <Icon icon={icon} size={16} color={tint.fg} /> : null}
+      {icon ? <Icon icon={icon} size={15} color={tint.fg} /> : null}
       <Text variant="caption" color={tint.fg} style={styles.label}>
         {label}
       </Text>
@@ -74,9 +75,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-start',
     gap: spacing.xs,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.sm + 2,
+    paddingVertical: spacing.xxs + 1,
     borderRadius: radii.pill,
   },
-  label: { fontSize: 14 },
+  label: { fontFamily: fonts.semiBold },
 });

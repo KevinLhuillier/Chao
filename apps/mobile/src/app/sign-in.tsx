@@ -173,8 +173,6 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
     borderRadius: radii.pill,
     backgroundColor: river.water,
-    borderBottomWidth: 5,
-    borderBottomColor: river.waterDeep,
     alignItems: 'center',
   },
   boat: { marginTop: -56 },

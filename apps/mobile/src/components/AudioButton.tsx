@@ -5,7 +5,7 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { t } from '@/i18n';
 import { ensureAudioMode } from '@/lib/audio';
-import { Icon, colors, haptics, radii } from '@/theme';
+import { Icon, borderWidth, colors, haptics } from '@/theme';
 
 type Props = {
   uri: string;
@@ -15,7 +15,6 @@ type Props = {
   /** Adds a "slow" button (playback at 0.6×). */
   slow?: boolean;
   color?: string;
-  shade?: string;
 };
 
 const SIZES = { lg: 88, md: 60, sm: 40 } as const;
@@ -24,14 +23,7 @@ const SIZES = { lg: 88, md: 60, sm: 40 } as const;
  * Speaker button for a recording (word or sentence) from the "audio" bucket.
  * Mount it with a `key` per recording: each one gets its own player.
  */
-export function AudioButton({
-  uri,
-  autoPlay,
-  size = 'md',
-  slow,
-  color = colors.info,
-  shade = colors.infoShade,
-}: Props) {
+export function AudioButton({ uri, autoPlay, size = 'md', slow, color = colors.primary }: Props) {
   const player = useAudioPlayer(uri);
   const status = useAudioPlayerStatus(player);
   const autoPlayed = useRef(false);
@@ -64,10 +56,8 @@ export function AudioButton({
           {
             width: d,
             height: d,
-            borderRadius: size === 'sm' ? radii.sm : radii.lg,
+            borderRadius: d / 2,
             backgroundColor: color,
-            borderBottomColor: shade,
-            borderBottomWidth: size === 'sm' ? 3 : 5,
           },
           pressed && styles.pressed,
           status.playing && styles.playing,
@@ -83,7 +73,7 @@ export function AudioButton({
           style={({ pressed }) => [
             styles.button,
             styles.slow,
-            { width: d * 0.62, height: d * 0.62, borderBottomColor: shade },
+            { width: d * 0.62, height: d * 0.62, borderRadius: d * 0.31 },
             pressed && styles.pressed,
           ]}>
           <Icon icon={Snail} size={Math.round(d * 0.3)} color={color} />
@@ -94,15 +84,13 @@ export function AudioButton({
 }
 
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', alignItems: 'flex-end', gap: 12 },
+  row: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   button: { alignItems: 'center', justifyContent: 'center' },
   slow: {
-    borderRadius: radii.md,
     backgroundColor: colors.surface,
-    borderWidth: 2,
-    borderColor: colors.border,
-    borderBottomWidth: 4,
+    borderWidth,
+    borderColor: colors.borderShade,
   },
-  pressed: { transform: [{ translateY: 3 }], borderBottomWidth: 1 },
+  pressed: { opacity: 0.75 },
   playing: { opacity: 0.85 },
 });

@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import Animated, { LinearTransition } from 'react-native-reanimated';
 
 import { t } from '@/i18n';
-import { colors, enter, spacing } from '@/theme';
+import { borderWidth, colors, enter, spacing } from '@/theme';
 
 import { Prompt } from './Prompt';
 import { Tile } from './Tile';
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start',
     gap: spacing.sm,
     paddingVertical: spacing.sm,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
+    borderTopWidth: borderWidth,
+    borderBottomWidth: borderWidth,
     borderColor: colors.border,
   },
   bank: {
